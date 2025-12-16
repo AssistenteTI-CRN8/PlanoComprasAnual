@@ -2,15 +2,13 @@
  * CONFIGURAÇÕES GERAIS
  **************************************/
 
-// Número de colunas editáveis por tabela (exceto Nº e Ações)
 const tableConfigs = {
     table1: 9,
-    table2: 0, // controlada dinamicamente
+    table2: 2, // Ação/Operação + Custo Total (sem contar # e Ações)
     table3: 14,
     table4: 16
 };
 
-// Contador de linhas
 let rowCounters = {
     table1: 0,
     table2: 0,
@@ -18,7 +16,6 @@ let rowCounters = {
     table4: 0
 };
 
-// Categorias disponíveis
 const budgetCategories = [
     "Passagem Aérea",
     "Passagem Rodoviária",
@@ -33,7 +30,6 @@ const budgetCategories = [
     "Outros"
 ];
 
-// Categorias ativas na table2
 let budgetColumns = [];
 
 /**************************************
@@ -58,33 +54,34 @@ function addBudgetColumn() {
 
     const table = document.getElementById('table2');
     const theadRow = table.querySelector('thead tr');
-    const thCells = Array.from(theadRow.querySelectorAll('th'));
-    const actionsHeader = thCells[thCells.length - 1];
+    const tbody = table.querySelector('tbody');
+    
+    // Encontrar a posição da coluna "Ações" no header
+    const headers = theadRow.querySelectorAll('th');
+    let actionsHeaderIndex = -1;
+    headers.forEach((th, i) => {
+        if (th.textContent.trim() === 'Ações') {
+            actionsHeaderIndex = i;
+        }
+    });
 
-    // Header
+    // Adicionar header ANTES da coluna Ações
     const newHeader = document.createElement('th');
     newHeader.style.width = '15%';
-    newHeader.innerHTML = `
-        ${category}
-        <button class="btn btn-danger btn-sm ms-2"
-            onclick="removeBudgetColumn('${category}')">
-            <i class="fas fa-times"></i>
-        </button>
-    `;
-    theadRow.insertBefore(newHeader, actionsHeader);
+    newHeader.innerHTML = `${category} <button class="btn btn-danger btn-sm ms-2" onclick="removeBudgetColumn('${category}')"><i class="fas fa-times"></i></button>`;
+    theadRow.insertBefore(newHeader, headers[actionsHeaderIndex]);
 
-    // Linhas existentes
-    const tbody = table.querySelector('tbody');
+    // Adicionar células nas linhas ANTES da célula de Ações (mesma posição)
     tbody.querySelectorAll('tr').forEach(row => {
-        const cells = Array.from(row.querySelectorAll('td'));
-        const actionsCell = cells[cells.length - 1];
-
+        const cells = row.querySelectorAll('td');
+        const actionsCell = cells[actionsHeaderIndex];
+        
         const td = document.createElement('td');
         const input = document.createElement('input');
         input.type = 'text';
         input.placeholder = '...';
-
         td.appendChild(input);
+        
         row.insertBefore(td, actionsCell);
     });
 
@@ -101,7 +98,7 @@ function removeBudgetColumn(category) {
 
     const table = document.getElementById('table2');
     const theadRow = table.querySelector('thead tr');
-    const headers = Array.from(theadRow.querySelectorAll('th'));
+    const headers = theadRow.querySelectorAll('th');
 
     let columnIndex = -1;
     headers.forEach((th, i) => {
@@ -116,7 +113,7 @@ function removeBudgetColumn(category) {
 
     const tbody = table.querySelector('tbody');
     tbody.querySelectorAll('tr').forEach(row => {
-        const cells = Array.from(row.querySelectorAll('td'));
+        const cells = row.querySelectorAll('td');
         if (cells[columnIndex]) {
             cells[columnIndex].remove();
         }
@@ -130,65 +127,15 @@ function removeBudgetColumn(category) {
 window.addRow = function(tableId) {
     const table = document.getElementById(tableId);
     const tbody = table.querySelector('tbody');
-
-    // TABLE2 (Orçamento)
-    if (tableId === 'table2') {
-        const row = document.createElement('tr');
-
-        // Nº
-        const tdNum = document.createElement('td');
-        tdNum.classList.add('text-center');
-        row.appendChild(tdNum);
-
-        // Ação/Operação
-        const tdActionOp = document.createElement('td');
-        const inputAction = document.createElement('input');
-        inputAction.type = 'text';
-        inputAction.placeholder = '...';
-        tdActionOp.appendChild(inputAction);
-        row.appendChild(tdActionOp);
-
-        // Custo Total
-        const tdTotal = document.createElement('td');
-        const inputTotal = document.createElement('input');
-        inputTotal.type = 'text';
-        inputTotal.placeholder = '...';
-        tdTotal.appendChild(inputTotal);
-        row.appendChild(tdTotal);
-
-        // Colunas orçamento dinâmicas
-        budgetColumns.forEach(() => {
-            const td = document.createElement('td');
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.placeholder = '...';
-            td.appendChild(input);
-            row.appendChild(td);
-        });
-
-        // Ações (SEMPRE POR ÚLTIMO)
-        const tdBtn = document.createElement('td');
-        tdBtn.classList.add('text-center');
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-danger btn-sm btn-delete-row';
-        btn.innerHTML = '<i class="fas fa-trash"></i>';
-        btn.addEventListener('click', () => deleteRow(btn));
-        tdBtn.appendChild(btn);
-        row.appendChild(tdBtn);
-
-        tbody.appendChild(row);
-        updateRowNumbers(tableId);
-        return;
-    }
-
-    // OUTRAS TABELAS
     const numCols = tableConfigs[tableId];
     const row = document.createElement('tr');
 
+    // Nº
     const tdNum = document.createElement('td');
     tdNum.classList.add('text-center');
     row.appendChild(tdNum);
 
+    // Colunas editáveis
     for (let i = 0; i < numCols; i++) {
         const td = document.createElement('td');
         const input = document.createElement('input');
@@ -198,6 +145,19 @@ window.addRow = function(tableId) {
         row.appendChild(td);
     }
 
+    // Se for table2, adicionar colunas dinâmicas
+    if (tableId === 'table2') {
+        budgetColumns.forEach(() => {
+            const td = document.createElement('td');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = '...';
+            td.appendChild(input);
+            row.appendChild(td);
+        });
+    }
+
+    // Coluna Ações (sempre última)
     const tdAction = document.createElement('td');
     tdAction.classList.add('text-center');
     const btn = document.createElement('button');
@@ -230,11 +190,10 @@ function updateRowNumbers(tableId) {
  **************************************/
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar TODAS as tabelas com 8 linhas
     Object.keys(tableConfigs).forEach(tableId => {
-        if (tableId !== 'table2') {
-            for (let i = 0; i < 8; i++) {
-                addRow(tableId);
-            }
+        for (let i = 0; i < 8; i++) {
+            addRow(tableId);
         }
     });
 
@@ -245,4 +204,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
