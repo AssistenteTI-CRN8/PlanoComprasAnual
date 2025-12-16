@@ -58,7 +58,7 @@ function addBudgetColumn() {
     
     // Pegar todos os headers
     const allHeaders = Array.from(theadRow.querySelectorAll('th'));
-    const actionsHeader = allHeaders[allHeaders.length - 2]; // Último header (Ações)
+    const actionsHeader = allHeaders[allHeaders.length]; // Último header (Ações)
 
     // Adicionar novo header ANTES do header de Ações
     const newHeader = document.createElement('th');
@@ -69,7 +69,7 @@ function addBudgetColumn() {
     // Adicionar célula em cada linha ANTES da última célula (Ações)
     tbody.querySelectorAll('tr').forEach(row => {
         const allCells = Array.from(row.querySelectorAll('td'));
-        const actionsCell = allCells[allCells.length - 2]; // Última célula (Ações)
+        const actionsCell = allCells[allCells.length]; // Última célula (Ações)
         
         const td = document.createElement('td');
         const input = document.createElement('input');
