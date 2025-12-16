@@ -4,7 +4,7 @@
 
 const tableConfigs = {
     table1: 9,
-    table2: 2, 
+    table2: 3, 
     table3: 14,
     table4: 16
 };
