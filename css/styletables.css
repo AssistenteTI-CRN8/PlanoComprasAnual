@@ -65,9 +65,11 @@ body {
   outline: 2px solid #0d6efd; 
   background: #fff; 
 }
-.btn-delete-row { 
-  padding: 4px 8px; 
-  font-size: 0.875rem; 
+.floating-delete:hover { 
+  transform: scale(1.1) !important; 
+}
+tr:hover { 
+  background-color: #f8f9fa !important; 
 }
 .tab-content { 
   padding: 20px; 
