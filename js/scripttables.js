@@ -69,7 +69,7 @@ function addBudgetColumn() {
     // Adicionar célula em cada linha ANTES da última célula (Ações)
     tbody.querySelectorAll('tr').forEach(row => {
         const allCells = Array.from(row.querySelectorAll('td'));
-        const actionsCell = allCells[allCells.length - 1]; // Última célula (Ações)
+        const actionsCell = allCells[allCells.length - 2]; // Última célula (Ações)
         
         const td = document.createElement('td');
         const input = document.createElement('input');
