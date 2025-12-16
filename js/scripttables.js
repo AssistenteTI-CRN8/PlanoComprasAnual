@@ -58,7 +58,7 @@ function addBudgetColumn() {
     
     // Pegar todos os headers
     const allHeaders = Array.from(theadRow.querySelectorAll('th'));
-    const actionsHeader = allHeaders[allHeaders.length]; // Último header (Ações)
+    const actionsHeader = allHeaders[allHeaders.length-1]; // Último header (Ações)
 
     // Adicionar novo header ANTES do header de Ações
     const newHeader = document.createElement('th');
@@ -66,11 +66,11 @@ function addBudgetColumn() {
     newHeader.innerHTML = `${category} <button class="btn btn-danger btn-sm ms-2" onclick="removeBudgetColumn('${category}')"><i class="fas fa-times"></i></button>`;
     theadRow.insertBefore(newHeader, actionsHeader);
 
-    // Adicionar célula em cada linha ANTES da última célula (Ações)
+    // Adicionar célula em cada linha ANTES da célula de Ações (identificada pela classe)
     tbody.querySelectorAll('tr').forEach(row => {
-        const allCells = Array.from(row.querySelectorAll('td'));
-        const actionsCell = allCells[allCells.length]; // Última célula (Ações)
-        
+        const actionsCell = row.querySelector('td.actions-cell');
+        if (!actionsCell) return; // Segurança caso não encontre
+
         const td = document.createElement('td');
         const input = document.createElement('input');
         input.type = 'text';
@@ -113,10 +113,12 @@ function removeBudgetColumn(category) {
             cells[columnIndex].remove();
         }
     });
+    
+    updateRowNumbers('table2');
 }
 
 /**************************************
- * CRUD DE LINHAS - TABLE2 (ISOLADA)
+ * CRUD DE LINHAS - TABLE2 (CORRIGIDA)
  **************************************/
 
 function addRowTable2() {
@@ -155,9 +157,9 @@ function addRowTable2() {
         row.appendChild(td);
     });
 
-    // Coluna Ações
+    // Coluna Ações (SEMPRE ÚLTIMA com classe específica)
     const tdBtn = document.createElement('td');
-    tdBtn.classList.add('text-center');
+    tdBtn.classList.add('text-center', 'actions-cell');
     const btn = document.createElement('button');
     btn.className = 'btn btn-danger btn-sm btn-delete-row';
     btn.innerHTML = '<i class="fas fa-trash"></i>';
@@ -170,7 +172,7 @@ function addRowTable2() {
 }
 
 /**************************************
- * CRUD DE LINHAS - OUTRAS TABELAS
+ * CRUD DE LINHAS - OUTRAS TABELAS (CORRIGIDA)
  **************************************/
 
 window.addRow = function(tableId) {
@@ -200,9 +202,9 @@ window.addRow = function(tableId) {
         row.appendChild(td);
     }
 
-    // Coluna Ações
+    // Coluna Ações (com classe específica)
     const tdAction = document.createElement('td');
-    tdAction.classList.add('text-center');
+    tdAction.classList.add('text-center', 'actions-cell');
     const btn = document.createElement('button');
     btn.className = 'btn btn-danger btn-sm btn-delete-row';
     btn.innerHTML = '<i class="fas fa-trash"></i>';
