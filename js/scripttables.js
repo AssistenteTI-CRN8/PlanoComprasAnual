@@ -3,8 +3,6 @@
  * CONFIGURAÇÕES GERAIS
  **************************************/
 
-console.log('SCRIPT CARREGADO');//DEBUG
-
 // Número de colunas editáveis por tabela (exceto Nº e Ações)
 const tableConfigs = {
     table1: 9,
@@ -44,8 +42,6 @@ let budgetColumns = [];
  **************************************/
 
 function addBudgetColumn() {
-    console.log('CLICK');//DEBUG
-    console.log(budgetColumns);//DEBUG
     const select = document.getElementById('budgetCategorySelect');
     const category = select.value;
 
