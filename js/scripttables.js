@@ -53,16 +53,17 @@ function addBudgetColumn() {
     const thead = table.querySelector('thead tr');
     const actionsHeader = thead.querySelector('th:last-child');
     
-    // Adicionar header da nova coluna
+    // Adicionar header da nova coluna ANTES da coluna de Ações
     const newHeader = document.createElement('th');
     newHeader.style.width = '15%';
     newHeader.innerHTML = `${category} <button class="btn btn-danger btn-sm ms-2" onclick="removeBudgetColumn('${category}')"><i class="fas fa-times"></i></button>`;
     thead.insertBefore(newHeader, actionsHeader);
     
-    // Adicionar células nas linhas existentes
+    // Adicionar células nas linhas existentes ANTES da última célula (Ações)
     const tbody = table.querySelector('tbody');
     tbody.querySelectorAll('tr').forEach(row => {
-        const actionsCell = row.querySelector('td:last-child');
+        const cells = row.querySelectorAll('td');
+        const actionsCell = cells[cells.length - 1]; // Última célula (Ações)
         const newCell = document.createElement('td');
         newCell.innerHTML = '<input type="number" step="0.01" placeholder="R$ 0,00">';
         row.insertBefore(newCell, actionsCell);
