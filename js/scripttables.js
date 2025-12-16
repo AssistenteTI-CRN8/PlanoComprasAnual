@@ -156,7 +156,14 @@ function addRowTable2() {
     });
 
     // Coluna Ações
-
+    const tdAction1 = document.createElement('td');
+    tdAction1.classList.add('text-center');
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-danger btn-sm btn-delete-row';
+    btn.innerHTML = '<i class="fas fa-trash"></i>';
+    btn.addEventListener('click', () => deleteRow(btn));
+    tdAction1.appendChild(btn);
+    row.appendChild(tdAction1);
     /*
     const tdBtn = document.createElement('td');
     tdBtn.classList.add('text-center');
