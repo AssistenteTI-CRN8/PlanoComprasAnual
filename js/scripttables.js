@@ -4,6 +4,23 @@ let modalInstance;
 let budgetCategoryCounter = 0;
 const budgetCategories = [];
 
+const params = new URLSearchParams(window.location.search);
+    const setor = params.get("setor");
+
+    const nomes = {
+        cadastro: "Cadastro",
+        fiscalizacao: "Fiscalização",
+        formacaoprofissional: "Formação Profissional",
+        financeiro:"Financeiro",
+        cobranca:"Cobrança",
+        tecnologia:"Tecnologia da Informação",
+        recursoshumanos:"Recursos Humanos"
+
+     };
+
+    document.getElementById("titulo-setor").innerText =
+        setor ? "Setor " + (nomes[setor] || setor) : "Setor Cadastro";
+
 // Opções de categorias
 const categoryOptions = [
     "Passagem Aérea",

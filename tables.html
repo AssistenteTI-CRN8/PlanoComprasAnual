@@ -52,15 +52,15 @@
                             Visão geral
                         </a>
                         <div class="sb-sidenav-menu-heading">Plano Orçamentário</div>
-                        <a class="nav-link active" href="tables.html">
+                        <a class="nav-link active" href="tables.html?setor=cadastro">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Setor de Cadastro
                         </a>
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="tables.html?setor=fiscalizacao">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Setor de Fiscalização
                         </a>
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="tables.html?setor=formacaoprofissional">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Comissão de Formação Profissional
                         </a>
@@ -72,7 +72,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Setor de Fiscalização</h1>
+                    <h1 class="mt-4"id="titulo-setor">Setor</h1>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
@@ -130,8 +130,8 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                    <div class="mb-3 d-flex gap-2">
+                                <div class="tab-pane fade" id="tab3" role="tabpanel">
+                                    <div class="mb-3">
                                         <button class="btn btn-success btn-sm" onclick="addRow('table2')">
                                             <i class="fas fa-plus"></i> Adicionar Linha
                                         </button>
@@ -141,30 +141,6 @@
                                     </div>
                                     <div class="table-responsive">
                                         <table class="editable-table table table-bordered" id="table2">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 2%">#</th>
-                                                    <th style="width: 30%">Ação/Operação</th>
-                                                    <th style="width: 10%">Quantidade</th>
-                                                    <th style="width: 10%">Custo Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                    <div class="mb-3">
-                                        <button class="btn btn-success btn-sm" onclick="addRow('table3')">
-                                            <i class="fas fa-plus"></i> Adicionar Linha
-                                        </button>
-                                        <button class="btn btn-warning btn-sm ms-2" onclick="saveTableData('table3')">
-                                            <i class="fas fa-save"></i> Salvar Planilha
-                                        </button>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="editable-table table table-bordered" id="table3">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 2%">#</th>
@@ -191,15 +167,15 @@
 
                                 <div class="tab-pane fade" id="tab4" role="tabpanel">
                                     <div class="mb-3">
-                                        <button class="btn btn-success btn-sm" onclick="addRow('table4')">
+                                        <button class="btn btn-success btn-sm" onclick="addRow('table3')">
                                             <i class="fas fa-plus"></i> Adicionar Linha
                                         </button>
-                                        <button class="btn btn-warning btn-sm ms-2" onclick="saveTableData('table4')">
+                                        <button class="btn btn-warning btn-sm ms-2" onclick="saveTableData('table3')">
                                             <i class="fas fa-save"></i> Salvar Planilha
                                         </button>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="editable-table table table-bordered" id="table4">
+                                        <table class="editable-table table table-bordered" id="table3">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 2%">#</th>
