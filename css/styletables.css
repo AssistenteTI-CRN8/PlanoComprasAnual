@@ -33,7 +33,7 @@ body {
 }
 
 .sb-sidenav .nav-link:hover {
-  color: #0d6efd;
+  color: #198754;
 }
 
 .sb-sidenav-footer {
@@ -79,7 +79,7 @@ body {
 }
 
 .editable-table input:focus {
-  outline: 2px solid #0d6efd;
+  outline: 2px solid #198754;
   background: #fff;
 }
 
@@ -119,7 +119,7 @@ tr:hover {
 
 .modal-body .form-control:focus,
 .modal-body .form-select:focus {
-  border-color: #0d6efd;
+  border-color: #459436;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
@@ -151,7 +151,7 @@ tr:hover {
 }
 
 .card-header {
-  background-color: #0d6efd;
+  background-color: #459436;
   color: white;
   font-weight: 600;
 }
@@ -160,7 +160,7 @@ tr:hover {
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
   font-weight: 600;
-  color: #0d6efd;
+  color: #459436;
 }
 
 .nav-tabs .nav-link {
@@ -169,5 +169,5 @@ tr:hover {
 }
 
 .nav-tabs .nav-link:hover {
-  color: #0d6efd;
+  color: #459436;
 }
