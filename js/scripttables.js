@@ -1,8 +1,34 @@
 // Variável para armazenar dados da tabela
+let currentSetor = '';
+let setorData = {};
 let table1Data = [];
 let modalInstance;
 let budgetCategoryCounter = 0;
 const budgetCategories = [];
+
+//Setores do conselho
+const setores = {
+    'diretoria': 'Diretoria',
+    'tecnologia': 'Tecnologia da Informação',
+    'rh': 'Recursos Humanos',
+    'licitacao': 'Comissão de Licitação',
+    'juridico': 'Jurídico',
+    'fiscalizacao': 'Fiscalização',
+    'financeiro': 'Financeiro',
+    'londrina': 'Delegacia de Londrina',
+    'tomada-contas': 'Comissão de Tomada de Contas',
+    'relacoes': 'Comissão de Relações Institucionais e Governamentais',
+    'coordenacao': 'Coordenação Técnica',
+    'comunicacao': 'Comissão de Comunicação',
+    'compras': 'Compras',
+    'patrimonio': 'Comissão Transitória de Patrimônio',
+    'etica': 'Comissão de Ética',
+    '20anos': 'Comissão Transitória de 20 anos',
+    'cobranca': 'Cobrança',
+    'cipa': 'Comissão Interna de Prevenção de Acidentes (CIPA)',
+    'formacao': 'Comissão de Formação Profissional',
+    'cadastro': 'Cadastro'
+};
 
 // Opções de categorias
 const categoryOptions = [
@@ -33,6 +59,68 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderTable1();
 });
+
+// Mudar setor atual
+function changeSetor(setor) {
+    currentSetor = setor;
+    document.getElementById('titulo-setor').textContent = setores[setor];
+
+    document.querySelectorAll('.sb-sidenav .nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    event.target.closest('.nav-link').classList.add('active');
+
+    loadTableData('table1');
+    loadTableData('table2');
+    loadTableData('table3');
+}
+
+// Mostrar dashboard
+function showDashboard() {
+    document.getElementById('titulo-setor').textContent = 'Visão Geral';
+    document.querySelectorAll('.sb-sidenav .nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+}
+
+// Carregar todos os dados do localStorage
+function loadAllData() {
+    const stored = localStorage.getItem('pca_crn8_data');
+    if (stored) {
+        try {
+            setorData = JSON.parse(stored);
+        } catch (e) {
+            setorData = {};
+        }
+    }
+}
+
+// Salvar todos os dados no localStorage
+function saveAllData() {
+    localStorage.setItem('pca_crn8_data', JSON.stringify(setorData));
+}
+
+// Obter chave do setor e tabela
+function getSetorTableKey(tableId) {
+    return `${currentSetor}_${tableId}`;
+}
+
+// Carregar dados da tabela
+function loadTableData(tableId) {
+    const key = getSetorTableKey(tableId);
+    const tbody = document.querySelector(`#${tableId} tbody`);
+    tbody.innerHTML = '';
+
+    const data = setorData[key] || [];
+
+    data.forEach((row, index) => {
+        if (tableId === 'table1') {
+            addRowToTable1(row, index);
+        } else {
+            addRowToTable(tableId, row);
+        }
+    });
+}
 
 // Adicionar categoria orçamentária
 function addBudgetCategory(categoria = '', quantidade = '', custoTotal = '') {
@@ -374,3 +462,50 @@ function saveTableData(tableId) {
     }
 }
 
+// Tornar células editáveis por duplo clique
+function makeTableEditable(tableId) {
+            const table = document.getElementById(tableId);
+            const cells = table.querySelectorAll('tbody td[contenteditable="true"]');
+            
+            cells.forEach(cell => {
+                cell.addEventListener('dblclick', function() {
+                    this.focus();
+                });
+
+                cell.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.blur();
+                    }
+                });
+            });
+        }
+
+        makeTableEditable('table2');
+        makeTableEditable('table3');
+/*
+FUNÇÃO TESTE DE SALVAR TABELA - NÃO CONSIDERA COMPORTAMENTO TABELA 1 - NÃO EDITÁVEL POR LINHA
+
+        function saveTableData(tableId) {
+            const key = getSetorTableKey(tableId);
+            const tbody = document.querySelector(`#${tableId} tbody`);
+            const rows = tbody.querySelectorAll('tr');
+            const data = [];
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = [];
+                cells.forEach((cell, index) => {
+                    if (index < cells.length - 1) {
+                        rowData.push(cell.textContent.trim());
+                    }
+                });
+                data.push(rowData);
+            });
+
+            setorData[key] = data;
+            saveAllData();
+            alert('Dados salvos com sucesso!');
+        }
+
+*/

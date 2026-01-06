@@ -4,14 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Plano Orçamentário Anual</title>
+    <title>Plano Orçamentário Anual - CRN8</title>
     <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin@7.0.7/css/styles.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/styletables.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripttables.js"></script>    
 </head>
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark fixed-top">
         <a class="navbar-brand ps-3" href="#">PCA - CRN8</a>
@@ -32,9 +30,7 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="#">Configurações</a></li>
                     <li><a class="dropdown-item" href="#">Registro de Atividades</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
+                    <li><hr class="dropdown-divider" /></li>
                     <li><a class="dropdown-item" href="#">Sair</a></li>
                 </ul>
             </li>
@@ -47,22 +43,90 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Principal</div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="#" onclick="showDashboard(); return false;">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Visão geral
+                            Visão Geral
                         </a>
                         <div class="sb-sidenav-menu-heading">Plano Orçamentário</div>
-                        <a class="nav-link active" href="tables.html?setor=cadastro">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Setor de Cadastro
+                        <a class="nav-link" href="#" onclick="changeSetor('diretoria'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chess-king"></i></div>
+                            Diretoria
                         </a>
-                        <a class="nav-link" href="tables.html?setor=fiscalizacao">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Setor de Fiscalização
+                        <a class="nav-link" href="#" onclick="changeSetor('tecnologia'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-laptop-code"></i></div>
+                            Tecnologia da Informação
                         </a>
-                        <a class="nav-link" href="tables.html?setor=formacaoprofissional">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        <a class="nav-link" href="#" onclick="changeSetor('rh'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Recursos Humanos
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('licitacao'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-gavel"></i></div>
+                            Comissão de Licitação
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('juridico'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-balance-scale"></i></div>
+                            Jurídico
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('fiscalizacao'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-search"></i></div>
+                            Fiscalização
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('financeiro'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                            Financeiro
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('londrina'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                            Delegacia de Londrina
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('tomada-contas'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-calculator"></i></div>
+                            Comissão de Tomada de Contas
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('relacoes'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-handshake"></i></div>
+                            Comissão de Relações Institucionais
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('coordenacao'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
+                            Coordenação Técnica
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('comunicacao'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-bullhorn"></i></div>
+                            Comissão de Comunicação
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('compras'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Compras
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('patrimonio'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                            Comissão Transitória de Patrimônio
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('etica'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
+                            Comissão de Ética
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('20anos'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-birthday-cake"></i></div>
+                            Comissão Transitória de 20 anos
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('cobranca'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            Cobrança
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('cipa'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-hard-hat"></i></div>
+                            CIPA
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('formacao'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
                             Comissão de Formação Profissional
+                        </a>
+                        <a class="nav-link" href="#" onclick="changeSetor('cadastro'); return false;">
+                            <div class="sb-nav-link-icon"><i class="fas fa-id-card"></i></div>
+                            Cadastro
                         </a>
                     </div>
                 </div>
@@ -72,7 +136,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4"id="titulo-setor">Setor Fiscalização</h1>
+                    <h1 class="mt-4" id="titulo-setor">Selecione um Setor</h1>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
@@ -96,7 +160,7 @@
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-                                    <div class="mb-3">
+                                    <div class="mb-3 mt-3">
                                         <button class="btn btn-success btn-sm" onclick="openAddModal()">
                                             <i class="fas fa-plus"></i> Adicionar Linha
                                         </button>
@@ -105,8 +169,8 @@
                                         </button>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="table1">
-                                            <thead>
+                                        <table class="table table-bordered table-sm" id="table1">
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th style="width: 2%">#</th>
                                                     <th style="width: 10%">Projeto</th>
@@ -127,7 +191,7 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                    <div class="mb-3">
+                                    <div class="mb-3 mt-3">
                                         <button class="btn btn-success btn-sm" onclick="addRow('table2')">
                                             <i class="fas fa-plus"></i> Adicionar Linha
                                         </button>
@@ -136,12 +200,12 @@
                                         </button>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="editable-table table table-bordered" id="table2">
-                                            <thead>
+                                        <table class="editable-table table table-bordered table-sm" id="table2">
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th style="width: 2%">#</th>
-                                                    <th style="width: 30%">Ação/Operação</th>
-                                                    <th style="width: 15%">Custo Total</th>
+                                                    <th style="width: 25%">Ação/Operação</th>
+                                                    <th style="width: 10%">Custo Total</th>
                                                     <th style="width: 5%">JAN</th>
                                                     <th style="width: 5%">FEV</th>
                                                     <th style="width: 5%">MAR</th>
@@ -154,6 +218,7 @@
                                                     <th style="width: 5%">OUT</th>
                                                     <th style="width: 5%">NOV</th>
                                                     <th style="width: 5%">DEZ</th>
+                                                    <th style="width: 3%">Ações</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -162,7 +227,7 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                    <div class="mb-3">
+                                    <div class="mb-3 mt-3">
                                         <button class="btn btn-success btn-sm" onclick="addRow('table3')">
                                             <i class="fas fa-plus"></i> Adicionar Linha
                                         </button>
@@ -171,26 +236,27 @@
                                         </button>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="editable-table table table-bordered" id="table3">
-                                            <thead>
+                                        <table class="editable-table table table-bordered table-sm" id="table3">
+                                            <thead class="table-light">
                                                 <tr>
                                                     <th style="width: 2%">#</th>
-                                                    <th style="width: 30%">Ação/Operação</th>
-                                                    <th style="width: 15%">Custo Orçado</th>
-                                                    <th style="width: 5%">JAN</th>
-                                                    <th style="width: 5%">FEV</th>
-                                                    <th style="width: 5%">MAR</th>
-                                                    <th style="width: 5%">ABR</th>
-                                                    <th style="width: 5%">MAI</th>
-                                                    <th style="width: 5%">JUN</th>
-                                                    <th style="width: 5%">JUL</th>
-                                                    <th style="width: 5%">AGO</th>
-                                                    <th style="width: 5%">SET</th>
-                                                    <th style="width: 5%">OUT</th>
-                                                    <th style="width: 5%">NOV</th>
-                                                    <th style="width: 5%">DEZ</th>
-                                                    <th style="width: 5%">Custo Realizado</th>
-                                                    <th style="width: 5%">Diferença</th>
+                                                    <th style="width: 20%">Ação/Operação</th>
+                                                    <th style="width: 8%">Custo Orçado</th>
+                                                    <th style="width: 4%">JAN</th>
+                                                    <th style="width: 4%">FEV</th>
+                                                    <th style="width: 4%">MAR</th>
+                                                    <th style="width: 4%">ABR</th>
+                                                    <th style="width: 4%">MAI</th>
+                                                    <th style="width: 4%">JUN</th>
+                                                    <th style="width: 4%">JUL</th>
+                                                    <th style="width: 4%">AGO</th>
+                                                    <th style="width: 4%">SET</th>
+                                                    <th style="width: 4%">OUT</th>
+                                                    <th style="width: 4%">NOV</th>
+                                                    <th style="width: 4%">DEZ</th>
+                                                    <th style="width: 8%">Custo Realizado</th>
+                                                    <th style="width: 8%">Diferença</th>
+                                                    <th style="width: 3%">Ações</th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
